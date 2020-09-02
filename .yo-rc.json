@@ -1,0 +1,37 @@
+{
+  "generator-sap-partner-eng": {
+    "package_version": "0.3.6",
+    "project_name": "dyndep",
+    "app_name": "dyndep",
+    "app_desc": "HDI Dynamic Deployer Sample Code",
+    "router_name": "dyndep-app",
+    "domain_name": "cfapps.us10.hana.ondemand.com",
+    "router_path": "app",
+    "database_path": "db",
+    "services_path": "srv",
+    "uaa_res_name": "dyndep-uaa",
+    "uaa_svc_name": "DYNDEP_UAA",
+    "database_name": "dyndep-hdb",
+    "db_schema_name": "",
+    "hdi_res_name": "dyndep-hdi",
+    "hdi_svc_name": "DYNDEP_HDI",
+    "sampledata_provided": true,
+    "hanacloud_compatible": true,
+    "module_names": [
+      "dyndep-srv"
+    ],
+    "module_paths": [
+      "srv"
+    ],
+    "module_apis": [
+      "dyndep_srv_api"
+    ],
+    "module_bes": [
+      "dyndep_srv_be"
+    ],
+    "module_routes": [
+      "node"
+    ],
+    "multitenant_enabled": false
+  }
+}

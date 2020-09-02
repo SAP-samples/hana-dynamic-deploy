@@ -1,0 +1,6 @@
+COLUMN TABLE "sensors.temp" (
+"tempId" INTEGER,
+"tempVal" INTEGER NOT NULL,
+"ts" TIMESTAMP NOT NULL,
+"created" TIMESTAMP NOT NULL,
+PRIMARY KEY ("tempId") )

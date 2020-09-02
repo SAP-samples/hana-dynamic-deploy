@@ -1,0 +1,259 @@
+## Generated mta.yaml based on yo sap-partner-eng version 0.3.6
+## appName = dyndep
+## language=nodejs; multiTenant=false
+## approuter=dyndep-app
+_schema-version: '3.1'
+ID: dyndep
+version: 0.0.1
+description: HDI Dynamic Deployer Sample Code
+parameters:
+   enable-parallel-deployments: true
+  
+  
+#build-parameters:
+#  before-all:
+#   - builder: custom
+#     commands:
+#      - npm install
+#      - npx -p @sap/cds-dk cds build
+
+modules:
+
+### New Modules Here ###
+
+# xs push dyndep-srv -p srv -n dyndep-srv -k 512M -m 256M
+ - name: dyndep-srv
+   type: nodejs
+   path: srv
+   build-parameters:
+      # Don't package the dependencies if you're running into EINTEGRITY issues
+      ignore: ["default-env.json","package-lock.json", "node_modules/"]
+      # Suppress the calling of npm install by listing no commands
+      builder: custom
+      commands: []
+   properties:
+      srv_url: ${default-url}
+   parameters:
+      memory: 256M
+      disk-quota: 512M
+      #host: ${org}-${space}-dyndep-srv
+      #domain: cfapps.us10.hana.ondemand.com
+   provides:
+    - name: dyndep_srv_api
+      properties:
+         url: ${default-url}
+   requires:
+    - name: dyndep-uaa
+    - name: dyndep-hdi
+    - name: dyndep-log
+    - name: dyndep-mgd
+    - name: dyndep_dyn1
+      group: deployers
+      properties:
+         url: ~{url}
+         user: ~{user}
+         password: ~{password}
+    - name: dyndep_dyn2
+      group: deployers
+      properties:
+         url: ~{url}
+         user: ~{user}
+         password: ~{password}
+    
+# xs push dyndep-dyn1 -p dyn1 -k 512M -m 512M -u none 
+ - name: dyndep-dyn1
+   type: com.sap.xs.hdi-dynamic
+   path: dyn1
+   build-parameters:
+      # Don't package the dependencies if you're running into EINTEGRITY issues
+      ignore: ["default-env.json","package-lock.json", "node_modules/"]
+      # Suppress the calling of npm install by listing no commands
+      builder: custom
+      commands: []
+   properties:
+      hdi_dynamic_deploy_url: ${default-url}
+      hdi_dynamic_deploy_user: ${generated-user}
+      hdi_dynamic_deploy_password: ${generated-password}
+      # ENFORCE_AUDITING: force usage of audit logging. If audit logging cannot be enabled, the server will throw an error and stop.
+      ENFORCE_AUDITING: true
+      # ENFORCE_V2: force usage of the V2 audit logging API. If audit logging V2 cannot be enabled, the server will throw an error and stop.
+      ENFORCE_V2: false
+      # AUDIT_LOG_TENANT: specifies the tenant to use for audit logging. Likely this will be the subaccount-id where your app is deployed. If this is not specified you may be unable to view the logs.
+      AUDIT_LOG_TENANT: DYNDEP_LOG 
+   parameters:
+      memory: 512M
+      disk-quota: 512M
+      #host: ${org}-${space}-dyndep-hdb
+      #domain: cfapps.us10.hana.ondemand.com
+   provides:
+    - name: dyndep_dyn1
+      properties:
+         url: ${default-url}
+         user: ${generated-user}
+         password: ${generated-password}
+   requires:
+    - name: dyndep-log
+
+# xs push dyndep-dyn2 -p dyn2 -k 512M -m 512M -u none 
+ - name: dyndep-dyn2
+   type: com.sap.xs.hdi-dynamic
+   path: dyn2
+   build-parameters:
+      # Don't package the dependencies if you're running into EINTEGRITY issues
+      ignore: ["default-env.json","package-lock.json", "node_modules/"]
+      # Suppress the calling of npm install by listing no commands
+      builder: custom
+      commands: []
+   properties:
+      hdi_dynamic_deploy_url: ${default-url}
+      hdi_dynamic_deploy_user: ${generated-user}
+      hdi_dynamic_deploy_password: ${generated-password}
+      # ENFORCE_AUDITING: force usage of audit logging. If audit logging cannot be enabled, the server will throw an error and stop.
+      ENFORCE_AUDITING: true
+      # ENFORCE_V2: force usage of the V2 audit logging API. If audit logging V2 cannot be enabled, the server will throw an error and stop.
+      ENFORCE_V2: false
+      # AUDIT_LOG_TENANT: specifies the tenant to use for audit logging. Likely this will be the subaccount-id where your app is deployed. If this is not specified you may be unable to view the logs.
+      AUDIT_LOG_TENANT: DYNDEP_LOG 
+   parameters:
+      memory: 512M
+      disk-quota: 512M
+      #host: ${org}-${space}-dyndep-hdb
+      #domain: cfapps.us10.hana.ondemand.com
+   provides:
+    - name: dyndep_dyn2
+      properties:
+         url: ${default-url}
+         user: ${generated-user}
+         password: ${generated-password}
+   requires:
+    - name: dyndep-log
+
+ - name: dyndep-hdb
+   type: com.sap.xs.hdi
+   path: db
+   build-parameters:
+      # Don't package the dependencies if you're running into EINTEGRITY issues
+      ignore: ["default-env.json","package-lock.json", "node_modules/"]
+      # Suppress the calling of npm install by listing no commands
+      builder: custom
+      commands: []
+   parameters:
+      memory: 512M
+      disk-quota: 512M
+      #host: ${org}-${space}-dyndep-hdb
+      #domain: cfapps.us10.hana.ondemand.com
+   requires:
+    - name: dyndep-hdi
+
+ - name: dyndep-app
+   type: html5
+   path: app
+   build-parameters:
+      # Don't package the dependencies if you're running into EINTEGRITY issues
+      ignore: ["default-env.json","package-lock.json", "node_modules/"]
+      # Suppress the calling of npm install by listing no commands
+      builder: custom
+      commands: []
+   parameters:
+      #host: ${org}-${space}-dyndep-app
+      #domain: cfapps.us10.hana.ondemand.com
+      #routes:
+      #  - route: dyndep-app-${space}-${app-name}.${default-domain}
+      disk-quota: 256M
+      memory: 256M
+   provides:
+    - name: Router_api
+      properties:
+         url: ${default-url}
+         application: ${app-name}
+# CDS-MTX
+   requires:
+   # cf bind-service dyndep-app DYNDEP_UAA
+    - name: dyndep-uaa
+   ### New Destinations Here ###
+    - name: dyndep_srv_api
+      group: destinations
+      properties:
+         name: dyndep_srv_be
+         url: ~{url}
+         forwardAuthToken: true
+
+resources:
+
+# xs create-service xsuaa application DYNDEP_UAA -c ./cds-security.json
+ - name: dyndep-uaa
+   type: org.cloudfoundry.managed-service
+   requires:
+    - name: Router_api
+   properties:
+      XSAPPNAME: ${xsuaa-app}
+   parameters:
+      # Re-run the following command after changing any @(requires: []) definitions in srv/*.cds
+      # Run this from the root of the project and uncomment the path:
+      # cds compile srv/ --to xsuaa,json > cds-security.json
+      #path: ./cds-security.json
+      # The combination of path: and config.scopes: Doesn't seem work.  Use one or the other.
+      # cds compile srv/ --to xsuaa,yaml and make sure the config: below matches
+      #path: ./cds-security.json
+      #path: ./xs-security.json
+      service: xsuaa
+      service-plan: default
+      service-name: DYNDEP_UAA
+      xsuaa-app: ${space}-~{Router_api/application}
+      # Define within config what used to be in the xs-security.json file.  path: now pulls in cds scopes/role templates
+      # Convert with https://www.json2yaml.com/
+      # https://github.wdf.sap.corp/pages/cap/guides/authorization#role-assignments-with-xsuaa
+      config:
+         xsappname: ${xsuaa-app}
+         ### tenant-mode
+         tenant-mode: dedicated
+         description: Security profile of the dyndep application
+         scopes:
+          - name: "$XSAPPNAME.Callback"
+            description: With this scope set, the callbacks for tenant onboarding, offboarding and getDependencies can be called.
+            grant-as-authority-to-apps: 
+             - "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+          - name: "$XSAPPNAME.Administrator"
+            description: Administrate the application
+          - name: "$XSAPPNAME.User"
+            description: Use the application
+         role-templates:
+          - name: Administrator
+            description: Administrator
+            scope-references:
+             - "$XSAPPNAME.Administrator"
+          - name: User
+            description: User
+            scope-references:
+             - "$XSAPPNAME.User"
+
+### New Resources Here ###
+
+ - name: dyndep-hdi
+   type: com.sap.xs.hdi-container
+   parameters:
+      service-name: DYNDEP_HDI
+      config:
+         schema: 
+
+# https://www.npmjs.com/package/@sap/audit-logging            
+ - name: dyndep-log
+   type: org.cloudfoundry.managed-service
+   parameters:
+      service: auditlog
+      service-plan: free
+      service-name: DYNDEP_LOG
+
+# DYNDEP_MGD Managed HANA (On-Prem)
+ - name: dyndep-mgd
+   type: org.cloudfoundry.managed-service
+   requires:
+    - name: dyndep-uaa
+   parameters:
+      service: managed-hana
+      service-plan: hdi-shared
+      service-name: DYNDEP_MGD
+      polling_timeout_seconds: 240
+      config:
+         acquireTimeoutMillis: max
+         polling_timeout_seconds: 480
