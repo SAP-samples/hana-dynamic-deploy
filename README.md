@@ -77,7 +77,7 @@ Tools used throughout the development of this project are evolving and my change
 
 ## Learn more...
 
-See:  for a detailed discussion.
+Stay tuned for an in-depth blog post with detailed discussion.
 
 
 ## License
