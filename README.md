@@ -3,20 +3,21 @@ SPDX-FileCopyrightText: 2020 Andrew Lunde <andrew.lunde@sap.com>
 
 SPDX-License-Identifier: Apache-2.0
 -->
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/cloud-sfsf-benefits-ext)](https://api.reuse.software/info/github.com/SAP-samples/cloud-sfsf-benefits-ext)
 
-# HANA Dynamic Deploy
+# SAP HANA Dynamic Deploy
 
-HANA XSA sample code project demonstrating the use of the HANA Deployment Infrastructure(HDI) dynamic deployer.  
+SAP HANA XSA sample code project demonstrating the use of the HANA Deployment Infrastructure(HDI) dynamic deployer.  
 
 ## Description
 
-This repository contains a complete Multi-Target Application (MTA) sample project that is an example of using the SAP Cloud Application Programming(CAP) approach and it's multitenancy support library to provide true enterprise multitenant application.
+This repository contains a complete Multi-Target Application (MTA) sample project that is an example of using the SAP Cloud Application Programming (CAP) approach and it's multitenancy support library to provide true enterprise multitenant application.
 
 While the principals described here apply specifically to the managed-hana service broker as implemented in on-premise HANA, this approach may be adapted to use the service manager service broker found in SAP Cloud Platform Cloud Foundry.  However, the details are not provided here.  The idea of creating HDI containers at run-time is useful in quasi-multitenant use-cases outside of pure Cloud Foundry multitenancy development approach supporting subscribability.
 
 ## Requirements
 
- - HANA Server Version 2 SPS 04 or later. [SAP HANA](https://www.sap.com/products/database-data-management/hana-database-management-system.html) or [SAP HANA, express edition](https://www.sap.com/cmp/td/sap-hana-express-edition.html).
+ - SAP HANA Server Version 2 SPS 04 or later. [SAP HANA](https://www.sap.com/products/database-data-management/hana-database-management-system.html) or [SAP HANA, express edition](https://www.sap.com/cmp/td/sap-hana-express-edition.html).
 
  
  ## Download and Installation
@@ -81,4 +82,4 @@ Stay tuned for an in-depth blog post with detailed discussion.
 
 
 ## License
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.
+Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
