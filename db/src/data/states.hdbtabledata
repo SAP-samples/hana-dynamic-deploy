@@ -1,0 +1,24 @@
+{
+	"format_version": 1,
+	"imports": [{
+		"column_mappings": {
+			"Name": "State",
+			"Abbrev": "Abbrev",
+			"Code": "Code"
+		},
+		"import_settings": {
+			"import_columns": [
+				"Name",
+				"Abbrev",
+				"Code"
+			],
+			"include_filter": []
+		},
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "states.csv",
+			"has_header": true
+		},
+		"target_table": "states"
+	}]
+}

@@ -1,4 +1,0 @@
-VIEW "sensors.tempNoTimestamp" AS SELECT
-  "tempId" as "TempId",
-  "tempVal" as "TempValx"
-FROM "sensors.temp"

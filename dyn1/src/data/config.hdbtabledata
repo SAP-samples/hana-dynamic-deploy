@@ -1,0 +1,23 @@
+{
+	"format_version": 1,
+	"imports": [{
+		"column_mappings": {
+			"Name": "Name",
+			"Value": "Value"
+		},
+		"import_settings": {
+			"import_columns": [
+				"Name",
+				"Value"
+			],
+			"include_filter": []
+		},
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "config.csv",
+            "has_header": true,
+            "do_quote": true
+		},
+		"target_table": "config"
+	}]
+}

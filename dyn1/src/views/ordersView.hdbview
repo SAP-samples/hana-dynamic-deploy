@@ -1,0 +1,12 @@
+VIEW "ordersView" AS SELECT 
+	"O"."item" AS "Item",
+	"CS"."Name" AS "State",
+	"O"."quantity" AS "Quantity",
+	"O"."priceUSD" AS "Price_USD",
+	("O"."priceUSD" * "O"."quantity") AS "Total_USD",
+	("O"."priceUSD" * "O"."quantity" * (SELECT "UperUSD" FROM "COMMON.CURRENCIES" WHERE "Code"='EUR')) AS "Total_EUR",
+	("O"."priceUSD" * "O"."quantity" * (SELECT "UperUSD" FROM "COMMON.CURRENCIES" WHERE "Code"='VES')) AS "Total_VES",
+	("O"."priceUSD" * "O"."quantity" * (SELECT "UperUSD" FROM "COMMON.CURRENCIES" WHERE "Code"='GLD')) AS "Total_GLD",
+	"O"."ordered" AS "Ordered"
+FROM "orders" AS "O" 
+JOIN "COMMON.STATES" AS "CS" ON "O"."origin" = "CS"."Code" 

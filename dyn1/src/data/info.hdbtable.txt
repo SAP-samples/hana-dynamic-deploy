@@ -1,0 +1,6 @@
+COLUMN TABLE "info" (
+"CustomerNumber" INTEGER,
+"CustomerName" NVARCHAR(32),
+"StateCode" NVARCHAR(2),
+"Loyalty" NVARCHAR(5),
+PRIMARY KEY ("CustomerNumber") )

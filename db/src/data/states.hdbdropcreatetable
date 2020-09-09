@@ -1,0 +1,5 @@
+COLUMN TABLE "states" (
+"Code" NVARCHAR(2),
+"Abbrev" NVARCHAR(6),
+"Name" NVARCHAR(24),
+PRIMARY KEY ("Code") )

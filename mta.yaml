@@ -93,6 +93,11 @@ modules:
          password: ${generated-password}
    requires:
     - name: dyndep-log
+    - name: POC_XXX-table-grantor
+      group: SERVICE_REPLACEMENTS
+      properties:
+         key: POC_log-table-grantor
+         service: 'UNASSIGNED_SO_FAR'
 
 # xs push dyndep-dyn2 -p dyn2 -k 512M -m 512M -u none 
  - name: dyndep-dyn2
@@ -128,6 +133,7 @@ modules:
    requires:
     - name: dyndep-log
 
+# xs push dyndep-hdb -p db -k 512M -m 512M ; sleep 20 ; xs stop dyndep-hdb
  - name: dyndep-hdb
    type: com.sap.xs.hdi
    path: db

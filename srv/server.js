@@ -38,6 +38,8 @@ const services = xsenv.getServices({
     instancemanager: { tag: 'xsa-instancemanager' }
 });
 
+const common_hdi = xsenv.getServices({ hana: 'DYNDEP_HDI' });
+
 createInstanceManager(services.instancemanager, function (err, instmgr) {
   if (err) {
     console.log('Create instance manager error:', err.message);
@@ -247,6 +249,69 @@ app.get("/node/instance_deploy", function (req, res) {
 }
 */
 
+/*
+{
+  "TARGET_CONTAINER": "DYNDEP_HDI1",
+  "SERVICE_REPLACEMENTS": [{"key":"POC_log-table-grantor","service": "DYNDEP_HDI"}],
+  "DEPLOY_ID": "DEPLOY_ME11",
+  "APPLICATION_VERSION_INFO": "MyVersionInfo",
+  "HDI_DEPLOY_OPTIONS": {
+      "include_filter": ["src/","cfg/"]
+  },
+  "VCAP_SERVICES" : {
+    "hana" : [ {
+      "name" : "DYNDEP_HDI1",
+      "label" : "hana",
+      "tags" : [ "hana", "database", "relational" ],
+      "plan" : "hdi-shared",
+  "credentials": {
+    "host": "hxe45p.lcfx.net",
+    "port": "30013",
+    "driver": "com.sap.db.jdbc.Driver",
+    "url": "jdbc:sap://hxe45p.lcfx.net:30013/?currentschema=879625EF3E7D492ABA06AD10FB21C91D",
+    "schema": "879625EF3E7D492ABA06AD10FB21C91D",
+    "hdi_user": "879625EF3E7D492ABA06AD10FB21C91D_7E8ORPMZGXZKG1Z0CTM26NQIX_DT",
+    "hdi_password": "Fy1Cu8dKochMme_bmfvQFQu0e9BEnhjS1AidNs-W-iefh4K.uP5eXnl2kmwHauhk7c36TkVlnIpSAOjpO-d23AV48zCwtxw_w_swMyNiuEdWJw0WGVT529_xM85ZIqbk",
+    "user": "879625EF3E7D492ABA06AD10FB21C91D_7E8ORPMZGXZKG1Z0CTM26NQIX_RT",
+    "password": "Rz8ET-xiqbHvouf62I6o5KkcP617xKTgQjzi5IgxiVn5WxDMbGURa7McympWfnmHgnmaXD7VFwL3Ut11K4wkzUO7ApLoSxpB5GZBRgYLaNurxlricgGsUEuvdtjVurjV",
+    "tenant_name": "SYSTEMDB",
+    "encrypt": false,
+    "db_hosts": [
+      {
+        "port": 30013,
+        "host": "hxe45p.lcfx.net"
+      }
+    ]
+  }
+    } ]
+  },
+    "ADDITIONAL_VCAP_SERVICES" : {
+    "hana" : [ {
+      "name" : "DYNDEP_HDI",
+      "label" : "hana",
+      "tags" : [ "hana", "database", "relational" ],
+      "plan" : "hdi-shared",
+      "credentials" : {
+        "schema" : "12DE1621216B484EAEA7BA643DE2BFE0",
+        "hdi_password" : "Pp30THQ88YD9.bsmZ4ct6nch-AhUEgj4FbVRNjp4CwcdS.il6dFVc.E960bFpiLWZSFXKu8w_1atPugA6oRyTDNNWV1gGIlwuA_DmeXGD.M.wy0V5K1cr7VnPNegJ9Sm",
+        "tenant_name" : "SYSTEMDB",
+        "password" : "Fa6cRb9.q_AE3-UeHe0NgzNktgdxiHQk2e42jsQqn3Xgx3DMrqqRMTm2AHfugk4jmoNEgPPgQ025XibaJ1trBepoTfN8uDOXRdhXPM3OW1fB5zMWLBQVIZJHPnNfDNzN",
+        "driver" : "com.sap.db.jdbc.Driver",
+        "port" : "30013",
+        "encrypt" : false,
+        "db_hosts" : [ {
+          "port" : 30013,
+          "host" : "hxe45p.lcfx.net"
+        } ],
+        "host" : "hxe45p.lcfx.net",
+        "hdi_user" : "12DE1621216B484EAEA7BA643DE2BFE0_14HZMGLWQB8HNTEHOZM2BX6QR_DT",
+        "user" : "12DE1621216B484EAEA7BA643DE2BFE0_14HZMGLWQB8HNTEHOZM2BX6QR_RT",
+        "url" : "jdbc:sap://hxe45p.lcfx.net:30013/?currentschema=12DE1621216B484EAEA7BA643DE2BFE0"
+      }
+    } ]
+  }
+}
+*/
     var use_deployer = {};
 	var use_source = "default";
 	deployers.forEach(deployer => {
@@ -307,12 +372,22 @@ app.get("/node/instance_deploy", function (req, res) {
 				}
 			};
 
-			if (use_source !== "default") {
+			if (use_source !== "default") { // I.E. dyn2
 				axios_config.data['HDI_DEPLOY_OPTIONS'] = {
 					include_filter: [
 						'src/' + use_source + '/'
 						]
 				}
+			}
+			else { // I.E. dyn1
+				axios_config.data['HDI_DEPLOY_OPTIONS'] = {
+					include_filter: [
+						'src/',
+						'cfg/'
+						]
+				};
+				// Need to get the hana object bound to srv module.
+				axios_config.data['ADDITIONAL_VCAP_SERVICES'] = common_hdi;
 			}
 
 			responseStr += "<pre>\naxios_config:\n" + inspect(axios_config,false,7) + "\n</pre>\n" + "<br />";

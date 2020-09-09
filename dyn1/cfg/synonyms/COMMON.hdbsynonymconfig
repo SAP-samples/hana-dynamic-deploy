@@ -1,0 +1,14 @@
+{
+  "COMMON.STATES": {
+    "target": {
+      "object": "states",
+      "schema.configure"    : "POC_log-table-grantor/schema"
+    }
+  },
+  "COMMON.CURRENCIES": {
+    "target": {
+      "object": "currencies",
+      "schema.configure"    : "POC_log-table-grantor/schema"
+    }
+  }
+}

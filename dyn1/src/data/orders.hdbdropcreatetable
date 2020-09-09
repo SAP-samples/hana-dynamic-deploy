@@ -1,0 +1,8 @@
+COLUMN TABLE "orders" (
+"orderId" INTEGER,
+"item" NVARCHAR(32),
+"origin" NVARCHAR(2),
+"quantity" INTEGER,
+"priceUSD" REAL,
+"ordered" TIMESTAMP NOT NULL,
+PRIMARY KEY ("orderId") )

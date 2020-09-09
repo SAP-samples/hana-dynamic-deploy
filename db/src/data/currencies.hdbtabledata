@@ -1,0 +1,26 @@
+{
+	"format_version": 1,
+	"imports": [{
+		"column_mappings": {
+			"Code": "Code",
+			"Name": "Name",
+			"UperUSD": "Units per USD",
+			"USDperU": "USD per Unit"
+		},
+		"import_settings": {
+			"import_columns": [
+				"Code",
+				"Name",
+				"UperUSD",
+				"USDperU"
+			],
+			"include_filter": []
+		},
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "currencies.csv",
+			"has_header": true
+		},
+		"target_table": "currencies"
+	}]
+}

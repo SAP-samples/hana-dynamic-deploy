@@ -153,9 +153,6 @@
         },
         "txt" : {
             "plugin_name" : "com.sap.hana.di.copyonly"
-        },
-        "md" : {
-            "plugin_name" : "com.sap.hana.di.copyonly"
         }
     }
 }

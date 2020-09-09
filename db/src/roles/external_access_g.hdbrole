@@ -1,0 +1,17 @@
+{
+  "role": {
+    "name": "POC_XXX::external_access_g#",
+    "object_privileges": [
+      {
+        "name":"states",
+        "type":"TABLE",
+        "privileges_with_grant_option":[ "SELECT" ]
+      },
+      {
+        "name":"currencies",
+        "type":"TABLE",
+        "privileges_with_grant_option":[ "SELECT" ]
+      }
+    ]
+  }
+}

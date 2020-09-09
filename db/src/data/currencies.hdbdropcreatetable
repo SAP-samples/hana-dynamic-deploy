@@ -1,0 +1,6 @@
+COLUMN TABLE "currencies" (
+"Code" NVARCHAR(3),
+"Name" NVARCHAR(24),
+"UperUSD" REAL,
+"USDperU" REAL,
+PRIMARY KEY ("Code") )

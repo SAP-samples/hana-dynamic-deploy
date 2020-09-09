@@ -1,0 +1,25 @@
+{
+	"format_version": 1,
+	"imports":
+	[
+        {
+            "target_table": "orders",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "orders.csv",
+                "has_header": true,
+                "do_quote": true
+            },
+            "import_settings": {
+                "import_columns": [
+                    "orderId",
+					"item",
+					"origin",
+					"quantity",
+					"priceUSD",
+					"ordered"
+                ]
+            }
+        }
+	]
+}

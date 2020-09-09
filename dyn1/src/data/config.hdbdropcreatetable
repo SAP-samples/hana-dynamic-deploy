@@ -1,0 +1,4 @@
+COLUMN TABLE "config" (
+"Name" NVARCHAR(24),
+"Value" NVARCHAR(24),
+PRIMARY KEY ("Name") )
