@@ -5,6 +5,7 @@
     "@sap/hdbext": "latest",
     "@sap/audit-logging": "3.1.1",
     "@sap/instance-manager": "2.2.0",
+    "cfenv": "latest",
     "express": "~4.16.0",
     "passport": "^0.4.0",
     "axios": "^0.20.0",

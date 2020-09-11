@@ -38,7 +38,9 @@ const services = xsenv.getServices({
     instancemanager: { tag: 'xsa-instancemanager' }
 });
 
-const common_hdi = xsenv.getServices({ hana: 'DYNDEP_HDI' });
+//const common_hdi = xsenv.readServices({ hana: 'DYNDEP_HDI' });
+const cfenv = require('cfenv');
+const common_hdi = cfenv.getAppEnv().services.hana;
 
 createInstanceManager(services.instancemanager, function (err, instmgr) {
   if (err) {
@@ -387,7 +389,8 @@ app.get("/node/instance_deploy", function (req, res) {
 						]
 				};
 				// Need to get the hana object bound to srv module.
-				axios_config.data['ADDITIONAL_VCAP_SERVICES'] = common_hdi;
+				axios_config.data['ADDITIONAL_VCAP_SERVICES'] = { "hana": common_hdi };
+				axios_config.data['SERVICE_REPLACEMENTS'] = [{"key":"POC_log-table-grantor","service": "DYNDEP_HDI"}];
 			}
 
 			responseStr += "<pre>\naxios_config:\n" + inspect(axios_config,false,7) + "\n</pre>\n" + "<br />";
