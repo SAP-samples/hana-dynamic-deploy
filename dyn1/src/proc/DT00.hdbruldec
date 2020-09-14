@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dtmodel:decisionTableModel xmlns:alias="http://www.sap.com/ndb/Rules/Alias" xmlns:dtmodel="http://www.sap.com/ndb/DecisionTableModel1.ecore" xmlns:table="http://www.sap.com/ndb/Rules/DecisionTable" schemaVersion="1.0" id="DT00" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal">
+  <descriptions/>
+  <defaultSchema/>
+  <dataSources/>
+  <privateDataFoundation>
+    <tableProxies/>
+    <joins/>
+    <layout>
+      <shapes/>
+    </layout>
+  </privateDataFoundation>
+  <dtmodel:variables/>
+  <alias:aliasset alias:guid="AS1748ecd37dax5ba00"/>
+  <table:decisiontable table:guid="DT1748ecd37d3xb4696" table:name="DT00">
+    <table:tablelayout/>
+  </table:decisiontable>
+</dtmodel:decisionTableModel>
