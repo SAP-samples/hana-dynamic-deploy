@@ -13,7 +13,7 @@ SAP HANA XSA sample code project demonstrating the use of the HANA Deployment In
 
 This repository contains a complete Multi-Target Application (MTA) sample project that is an example of using the SAP Cloud Application Programming (CAP) approach and it's multitenancy support library to provide true enterprise multitenant application.
 
-While the principals described here apply specifically to the managed-hana service broker as implemented in on-premise HANA, this approach may be adapted to use the service manager service broker found in SAP Cloud Platform Cloud Foundry.  However, the details are not provided here.  The idea of creating HDI containers at run-time is useful in quasi-multitenant use-cases outside of pure Cloud Foundry multitenancy development approach supporting subscribability.
+While the principals described here apply specifically to the managed-hana service broker as implemented in on-premise HANA, this approach may be adapted to use the service manager service broker found in SAP Business Technology Platform Cloud Foundry.  However, the details are not provided here.  The idea of creating HDI containers at run-time is useful in quasi-multitenant use-cases outside of pure Cloud Foundry multitenancy development approach supporting subscribability.
 
 ## Requirements
 
@@ -50,7 +50,7 @@ This example project contains no known issues.
 
 ## Limitations
 
-SAP Cloud Platform Cloud Foundry deployment is currently not supported. (Leave feature requests as [issues](https://github.com/SAP-samples/hana-dynamic-deploy/issues).
+SAP Business Technology Platform Cloud Foundry deployment is currently not supported. (Leave feature requests as [issues](https://github.com/SAP-samples/hana-dynamic-deploy/issues).
 
 ## How to obtain support
 
